@@ -1,0 +1,30 @@
+.Home {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.Home button {
+    width: 349px;
+    height: 51px;
+    background-color: #121212;
+    color: white;
+    text-align: center;
+    border-radius: 16px;
+    border: none;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21.78px;
+    cursor: pointer;
+}
+
+@media (max-width: 400px) {
+    .Home button {
+        width: 300px;
+    }
+}

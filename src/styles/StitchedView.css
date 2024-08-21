@@ -1,0 +1,49 @@
+.stitched {
+    font-family: "Inter", sans-serif;
+    margin: 0;
+    margin-top: 25px;
+    display: grid;
+    /* width: 100vw; */
+    /* height: 100vh; */
+}
+
+.vid-container {
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    margin-top: 25px;
+    border-radius: 20px;
+}
+
+.vid-container video {
+    width: 80%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.stitched button {
+    width: 349px;
+    height: 51px;
+    background-color: #121212;
+    color: white;
+    text-align: center;
+    border-radius: 16px;
+    border: none;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21.78px;
+    cursor: pointer;
+    justify-self: center;
+    margin-top: 35px;
+    margin-bottom: 25px;
+}
+
+@media (max-width: 450px) {
+    .stitched button {
+        width: 300px;
+    }
+}
