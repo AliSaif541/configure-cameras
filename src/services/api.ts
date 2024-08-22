@@ -1,6 +1,7 @@
 export const fetchCameraIndexes = async (): Promise<number[]> => {
     try {
-      const response = await fetch('http://localhost:3001/list_cameras');
+      const response = await fetch('http://localhost:3001/list-cameras');
+      console.log('response:', response);
       if (!response.ok) {
         throw new Error('Failed to fetch camera indexes');
       }
