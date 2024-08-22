@@ -28,13 +28,16 @@ export const fetchVideoFeed = async (cameraIndex: number): Promise<string> => {
 };
 
 export const handleCameraIndexes = async (indexes: number[]): Promise<string> => {
-    try {
-        console.log('Received indexes:', indexes);
-        await new Promise((resolve) => setTimeout(resolve, 5000));
-        
-        return 'https://www.w3schools.com/html/mov_bbb.mp4';
-    } catch (error) {
-        console.error('Error handling camera indexes:', error);
-        throw error;
-    }
+  try {
+      console.log('Received indexes:', indexes);
+      await new Promise((resolve) => setTimeout(resolve, 5000));
+      
+      const leftIndex = indexes[0];
+      const rightIndex = indexes[1];
+      
+      return `http://localhost:3001/stitched_feed/${leftIndex}/${rightIndex}/`;
+  } catch (error) {
+      console.error('Error handling camera indexes:', error);
+      throw error;
+  }
 };

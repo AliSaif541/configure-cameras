@@ -15,7 +15,7 @@ const StitchedView: React.FC<StitchedViewProps> = ({ stitchedFeed }) => {
         <div className="stitched">
             <h1>Stitched View</h1>
             <div className='vid-container'>
-                <video src={stitchedFeed} />
+                <img src={stitchedFeed} />
             </div>
             <button onClick={handleSubmit}>Configure Cameras</button>
         </div>

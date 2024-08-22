@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from 'react';
 import { fetchCameraIndexes, fetchVideoFeed, handleCameraIndexes } from '../services/api';
 import '../styles/ConfigureCameras.css';
@@ -24,7 +22,7 @@ const ConfigureCameras: React.FC<ConfigureCamerasProps> = ({ setStitchedFeed }) 
             setCameraOptions(cameras);
             setCameraAmount([...Array(cameras.length).keys()].map(i => (cameras.length - i).toString()));
             setDisplayedCount(cameras.length);
-            setSelectedCameras(cameras);
+            setSelectedCameras(new Array(cameras.length).fill(cameras[0]));
         } catch (error) {
             console.error('Error initializing cameras:', error);
         }
@@ -33,6 +31,15 @@ const ConfigureCameras: React.FC<ConfigureCamerasProps> = ({ setStitchedFeed }) 
     useEffect(() => {
         initializeCameras();
     }, []);
+
+    const handleCameraChange = (index: number, cameraIndex: number) => {
+        setSelectedCameras(prevSelectedCameras => {
+            const newSelectedCameras = [...prevSelectedCameras];
+            newSelectedCameras[index] = cameraIndex;
+            console.log(newSelectedCameras)
+            return newSelectedCameras;
+        });
+    };
 
     const handleSubmit = async () => {
         setLoading(true); 
@@ -63,6 +70,16 @@ const ConfigureCameras: React.FC<ConfigureCamerasProps> = ({ setStitchedFeed }) 
             <div className='images-container'>
                 {selectedCameras.slice(0, displayedCount).map((cameraIndex, index) => (
                     <div className={`wrapper img-${index}`} key={index}>
+                        <div className='dropdown'>
+                            <select
+                                value={cameraIndex}
+                                onChange={(e) => handleCameraChange(index, Number(e.target.value))}
+                            >
+                                {cameraOptions.map((option) => (
+                                    <option key={option} value={option}>{`Camera ${option}`}</option>
+                                ))}
+                            </select>
+                        </div>
                         <div className="image-wrapper">
                             <img src={`http://localhost:3001/video_feed/${cameraIndex}`} alt={`Camera ${cameraIndex}`} />
                         </div>
