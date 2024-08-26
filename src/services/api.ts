@@ -12,7 +12,21 @@ export const fetchCameraIndexes = async (): Promise<number[]> => {
       throw error;
     }
 };
-  
+export const reinitializeCameras = async (): Promise<string> => {
+  try {
+      const response = await fetch('http://localhost:3001/reinitialize-cameras', {
+          method: 'POST'
+      });
+      if (!response.ok) {
+          throw new Error('Failed to reinitialize cameras');
+      }
+      const data = await response.json();
+      return data.message;
+  } catch (error) {
+      console.error('Error reinitializing cameras:', error);
+      throw error;
+  }
+};
 export const fetchVideoFeed = async (cameraIndex: number): Promise<string> => {
     try {
       const response = await fetch(`http://localhost:3001/video_feed/${cameraIndex}`);

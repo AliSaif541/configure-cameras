@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchCameraIndexes, fetchVideoFeed, handleCameraIndexes } from '../services/api';
+import { fetchCameraIndexes, fetchVideoFeed, handleCameraIndexes,reinitializeCameras } from '../services/api';
 import '../styles/ConfigureCameras.css';
 import { useNavigate } from 'react-router-dom';
 import { TailSpin } from 'react-loader-spinner';
@@ -17,7 +17,9 @@ const ConfigureCameras: React.FC<ConfigureCamerasProps> = ({ setStitchedFeed }) 
     const navigate = useNavigate();
 
     const initializeCameras = async () => {
+        setLoading(true);
         try {
+            await reinitializeCameras();
             const cameras = await fetchCameraIndexes();
             setCameraOptions(cameras);
             setCameraAmount([...Array(cameras.length).keys()].map(i => (cameras.length - i).toString()));
@@ -25,6 +27,8 @@ const ConfigureCameras: React.FC<ConfigureCamerasProps> = ({ setStitchedFeed }) 
             setSelectedCameras(new Array(cameras.length).fill(cameras[0]));
         } catch (error) {
             console.error('Error initializing cameras:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
